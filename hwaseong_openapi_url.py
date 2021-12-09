@@ -31,7 +31,7 @@ class hwaseong_data(Resource):
             r = [dict((cur.description[i][0], value)
                       for i, value in enumerate(row)) for row in cur.fetchall()]
             # print(json.dumps(r, indent="\t", ensure_ascii=False))
-            print("검색성")
+            print("검색성공")
             return jsonify({'hwaseongDATA' : r})
         except Exception as e:
             return {'error': str(e)}
