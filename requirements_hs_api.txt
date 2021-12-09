@@ -1,0 +1,21 @@
+aniso8601 @ file:///tmp/build/80754af9/aniso8601_1614708839015/work
+certifi==2021.5.30
+cffi @ file:///opt/concourse/worker/volumes/live/6ed3f91b-28f6-4d58-6a9b-7a5e864c6554/volume/cffi_1625814710543/work
+click==8.0.3
+cryptography @ file:///opt/concourse/worker/volumes/live/efc30a4d-1b2f-4c46-6f02-ff41b1cfc0e9/volume/cryptography_1635366582988/work
+dataclasses @ file:///tmp/build/80754af9/dataclasses_1614363715916/work
+Flask @ file:///tmp/build/80754af9/flask_1634118196080/work
+Flask-MySQL==1.5.2
+Flask-RESTful @ file:///tmp/build/80754af9/flask-restful_1613768889368/work
+importlib-metadata==4.8.2
+itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
+Jinja2==3.0.3
+MarkupSafe @ file:///opt/concourse/worker/volumes/live/16a820f0-3874-45b4-6b79-5313238ead21/volume/markupsafe_1621528157387/work
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+PyMySQL @ file:///opt/concourse/worker/volumes/live/c85d1a83-929d-464d-5004-fc4ad078a4ae/volume/pymysql_1610482898128/work
+python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+pytz==2021.3
+six @ file:///tmp/build/80754af9/six_1623709665295/work
+typing_extensions==4.0.1
+Werkzeug @ file:///tmp/build/80754af9/werkzeug_1635505089296/work
+zipp==3.6.0
