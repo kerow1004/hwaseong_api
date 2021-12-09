@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6ab820f2-573d-41f0-919f-b7284f56ea6a" name="hwaseong_api">
+        <fileTransfer accessType="SFTP" host="3.37.219.7" port="22" sshConfigId="ab5bf2d7-6fab-49ec-ab21-d39de53f290b" sshConfig="ec2-user@3.37.219.7:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
