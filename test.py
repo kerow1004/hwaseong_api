@@ -50,4 +50,4 @@ app.config['MYSQL_DATABASE_HOST'] = '3.37.219.7'
 mysql.init_app(app)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5050, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
