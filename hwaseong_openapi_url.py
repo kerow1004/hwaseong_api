@@ -50,7 +50,7 @@ api.add_resource(hwaseong_data, '/hwaseong_data')
 app.config['MYSQL_DATABASE_USER'] = 'wiseadmin'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'Wise1357!@'
 app.config['MYSQL_DATABASE_DB'] = 'hwaseong_api_DB'
-app.config['MYSQL_DATABASE_HOST'] = '3.37.219.7'
+app.config['MYSQL_DATABASE_HOST'] = '13.125.244.217'
 
 mysql.init_app(app)
 
