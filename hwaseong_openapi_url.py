@@ -46,12 +46,7 @@ class hwaseong_IndexKor(Resource):
             parser.add_argument('IndexKor', required=True, type=str)
             args = parser.parse_args()
             cur = mysql.connect().cursor()
-            cur.execute('''select a.KSIC, a.IndexKor, a.IndexEng, c.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
-                    , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
-                    , c.DE, c.Division, c.Profit, c.Price, c.Kg as T, c.CNT from codezip as a
-                    left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
-                    left join merge_country as c on a.HsCode = c.HsCode
-                    where a.KSIC = '''+args['KSIC']+'''  and c.HsCode = '''+ args['HsCode'] +''' and a.NTS = ''' +args['NTS']+ ''' and a.IndexKor like '% '''+args['IndexKor']+''' %' ''')
+            cur.execute('''select * from codezip''')
 
             r = [dict((cur.description[i][0], value)
                       for i, value in enumerate(row)) for row in cur.fetchall()]
