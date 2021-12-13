@@ -55,7 +55,7 @@ class hwaseong_IndexKor(Resource):
                         , c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT from codezip as a
                         left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
                         join merge_country as c on a.HsCode = c.HsCode
-                        where a.IndexKor like '% '''+args['indexkor']+''' %'  and b.Year = ''' +args['year']+ ''') as d''')
+                        where a.IndexKor like '%'''+args['indexkor']+'''%'  and b.Year = ''' +args['year']+ ''') as d''')
 
                 r = [dict((cur.description[i][0], value)
                           for i, value in enumerate(row)) for row in cur.fetchall()]
