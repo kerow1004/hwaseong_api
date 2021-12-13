@@ -21,7 +21,7 @@ class hwaseong_KSIC(Resource):
             parser.add_argument('year', required=True, type=str)
             args = parser.parse_args()
             cur = mysql.connect().cursor()
-            cur.execute('''select lpad(a.KSIC, 5,0), a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0), a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0), a.NTSKor
+            cur.execute('''select lpad(a.KSIC, 5,0) as KSIC, a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0) as HsCode, a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0) as NTS, a.NTSKor
                     , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                     , c.DE, c.Division, c.Profit, c.Price, c.Kg as T, c.CNT from codezip as a
                     left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
@@ -44,7 +44,7 @@ class hwaseong_IndexKor(Resource):
             parser.add_argument('year', required=True, type=str)
             args = parser.parse_args()
             cur = mysql.connect().cursor()
-            cur.execute('''select lpad(a.KSIC, 5,0), a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0), a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0), a.NTSKor
+            cur.execute('''select lpad(a.KSIC, 5,0) as KSIC, a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0) as HsCode, a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0) as NTS, a.NTSKor
                     , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                     , c.DE, c.Division, c.Profit, c.Price, c.Kg as T, c.CNT from codezip as a
                     left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
@@ -68,7 +68,7 @@ class hwaseong_Hscode(Resource):
             parser.add_argument('division', required=True, type=str)
             args = parser.parse_args()
             cur = mysql.connect().cursor()
-            cur.execute('''select lpad(a.KSIC, 5,0), a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0), a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0), a.NTSKor
+            cur.execute('''select lpad(a.KSIC, 5,0) as KSIC, a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0) as HsCode, a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0) as NTS, a.NTSKor
                     , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                     , c.DE, c.Division, c.Profit, c.Price, c.Kg as T, c.CNT from codezip as a
                     left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
@@ -78,7 +78,7 @@ class hwaseong_Hscode(Resource):
 
             r = [dict((cur.description[i][0], value)
                       for i, value in enumerate(row)) for row in cur.fetchall()]
-            print(json.dumps(r, indent="\t", ensure_ascii=False))
+            # print(json.dumps(r, indent="\t", ensure_ascii=False))
             print("검색성공", timecount())
             return jsonify({'hwaseongDATA' : r})
         except Exception as e:
@@ -92,7 +92,7 @@ class hwaseong_NTS(Resource):
             parser.add_argument('year', required=True, type=str)
             args = parser.parse_args()
             cur = mysql.connect().cursor()
-            cur.execute('''select lpad(a.KSIC, 5,0), a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0), a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0), a.NTSKor
+            cur.execute('''select lpad(a.KSIC, 5,0) as KSIC, a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0) as HsCode, a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0) as NTS, a.NTSKor
                     , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                     , c.DE, c.Division, c.Profit, c.Price, c.Kg as T, c.CNT from codezip as a
                     left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
