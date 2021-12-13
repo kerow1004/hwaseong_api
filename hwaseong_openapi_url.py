@@ -28,7 +28,7 @@ class hwaseong_KSIC(Resource):
                         , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                         , c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT from codezip as a
                         left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
-                        left join merge_country as c on a.HsCode = c.HsCode
+                        join merge_country as c on a.HsCode = c.HsCode
                         where a.KSIC = '''+args['ksic']+''' and b.Year = ''' +args['year']+''') as d''' )
 
                 r = [dict((cur.description[i][0], value)
@@ -54,7 +54,7 @@ class hwaseong_IndexKor(Resource):
                         , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                         , c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT from codezip as a
                         left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
-                        left join merge_country as c on a.HsCode = c.HsCode
+                        join merge_country as c on a.HsCode = c.HsCode
                         where a.IndexKor like '% '''+args['indexkor']+''' %'  and b.Year = ''' +args['year']+ ''') as d''')
 
                 r = [dict((cur.description[i][0], value)
@@ -81,7 +81,7 @@ class hwaseong_Hscode(Resource):
                         , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                         , c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT from codezip as a
                         left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
-                        left join merge_country as c on a.HsCode = c.HsCode
+                        join merge_country as c on a.HsCode = c.HsCode
                         where c.HsCode = ''' +args['hscode'] + ''' and b.Year = ''' +args['year'] + ''' and c.Division like "'''+args['division']+'''" ) as d''' )
 
 
@@ -108,7 +108,7 @@ class hwaseong_NTS(Resource):
                         , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                         , c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT from codezip as a
                         left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
-                        left join merge_country as c on a.HsCode = c.HsCode
+                        join merge_country as c on a.HsCode = c.HsCode
                         where a.NTS = '''+args['nts']+''' and b.Year = ''' +args['year']+ ''') as d''')
 
                 r = [dict((cur.description[i][0], value)
