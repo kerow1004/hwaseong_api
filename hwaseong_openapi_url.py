@@ -21,7 +21,7 @@ class hwaseong_KSIC(Resource):
             parser.add_argument('year', required=True, type=str)
             args = parser.parse_args()
             cur = mysql.connect().cursor()
-            cur.execute('''select a.KSIC, a.IndexKor, a.IndexEng, c.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
+            cur.execute('''select lpad(a.KSIC, 5,0), a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0), a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0), a.NTSKor
                     , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                     , c.DE, c.Division, c.Profit, c.Price, c.Kg as T, c.CNT from codezip as a
                     left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
@@ -44,7 +44,7 @@ class hwaseong_IndexKor(Resource):
             parser.add_argument('year', required=True, type=str)
             args = parser.parse_args()
             cur = mysql.connect().cursor()
-            cur.execute('''select a.KSIC, a.IndexKor, a.IndexEng, c.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
+            cur.execute('''select lpad(a.KSIC, 5,0), a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0), a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0), a.NTSKor
                     , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                     , c.DE, c.Division, c.Profit, c.Price, c.Kg as T, c.CNT from codezip as a
                     left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
@@ -68,7 +68,7 @@ class hwaseong_Hscode(Resource):
             parser.add_argument('division', required=True, type=str)
             args = parser.parse_args()
             cur = mysql.connect().cursor()
-            cur.execute('''select a.KSIC, a.IndexKor, a.IndexEng, c.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
+            cur.execute('''select lpad(a.KSIC, 5,0), a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0), a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0), a.NTSKor
                     , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                     , c.DE, c.Division, c.Profit, c.Price, c.Kg as T, c.CNT from codezip as a
                     left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
@@ -92,7 +92,7 @@ class hwaseong_NTS(Resource):
             parser.add_argument('year', required=True, type=str)
             args = parser.parse_args()
             cur = mysql.connect().cursor()
-            cur.execute('''select a.KSIC, a.IndexKor, a.IndexEng, c.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
+            cur.execute('''select lpad(a.KSIC, 5,0), a.IndexKor, a.IndexEng, lpad(c.HsCode, 6,0), a.HsCodeKor, a.HsCodeEng, lpad(a.NTS, 6,0), a.NTSKor
                     , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                     , c.DE, c.Division, c.Profit, c.Price, c.Kg as T, c.CNT from codezip as a
                     left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
