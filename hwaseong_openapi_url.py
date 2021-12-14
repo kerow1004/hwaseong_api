@@ -21,15 +21,18 @@ class hwaseong_KSIC(Resource):
             parser.add_argument('year', required=True, type=str)
             args = parser.parse_args()
             with mysql.connect().cursor() as cur:
-                cur.execute('''select lpad(d.KSIC, 5,0) as KSIC, d.IndexKor, d.IndexEng, lpad(d.HsCode, 6,0) as HsCode, d.HsCodeKor, d.HsCodeEng, lpad(d.NTS, 6,0) as NTS, d.NTSKor
-                        , d.Year, d.Month, d.Class, d.Biz, d.Prod, d.DLVY, d.BL
-                        , d.DE, d.Division, d.Profit, d.Price, d.Kg as T, d.CNT from
-                        (select a.KSIC, a.IndexKor, a.IndexEng, c.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
-                        , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
-                        , c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT from codezip as a
-                        left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
-                        join merge_country as c on a.HsCode = c.HsCode
-                        where a.KSIC = '''+args['ksic']+''' and b.Year = ''' +args['year']+''') as d''' )
+                cur.execute('''select e.KSIC, e.IndexKor, e.IndexEng, e.HsCode, e.HsCodeKor, e.HsCodeEng, e.NTS, e.NTSKor, e.Year, e.Month
+                                    , e.Class, e.Biz, e.Prod, e.DLVY, e.BL, c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT 
+                                from
+                                    (select a.KSIC, a.IndexKor, a.IndexEng, a.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
+                                        , b.Year, a.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
+                                        from codezip as a
+                                        left join ksic_Prod_DLVY as b
+                                            on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor and a.Year = b.Year) as e
+                                        left join merge_country as c
+                                            on 1=1 
+                                            where e.KSIC = '''+args['ksic']+''' and e.Year = ''' +args['year']+'''
+                                            limit 100 offset 0''' )
 
                 r = [dict((cur.description[i][0], value)
                           for i, value in enumerate(row)) for row in cur.fetchall()]
@@ -47,15 +50,17 @@ class hwaseong_IndexKor(Resource):
             parser.add_argument('year', required=True, type=str)
             args = parser.parse_args()
             with mysql.connect().cursor() as cur:
-                cur.execute('''select lpad(d.KSIC, 5,0) as KSIC, d.IndexKor, d.IndexEng, lpad(d.HsCode, 6,0) as HsCode, d.HsCodeKor, d.HsCodeEng, lpad(d.NTS, 6,0) as NTS, d.NTSKor
-                        , d.Year, d.Month, d.Class, d.Biz, d.Prod, d.DLVY, d.BL
-                        , d.DE, d.Division, d.Profit, d.Price, d.Kg as T, d.CNT from
-                        (select a.KSIC, a.IndexKor, a.IndexEng, c.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
-                        , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
-                        , c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT from codezip as a
-                        left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
-                        join merge_country as c on a.HsCode = c.HsCode
-                        where a.IndexKor like '%'''+args['indexkor']+'''%'  and b.Year = ''' +args['year']+ ''') as d''')
+                cur.execute('''select e.KSIC, e.IndexKor, e.IndexEng, e.HsCode, e.HsCodeKor, e.HsCodeEng, e.NTS, e.NTSKor, e.Year, e.Month
+                                    , e.Class, e.Biz, e.Prod, e.DLVY, e.BL, c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT 
+                                from
+                                    (select a.KSIC, a.IndexKor, a.IndexEng, a.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
+                                        , b.Year, a.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
+                                        from codezip as a
+                                        left join ksic_Prod_DLVY as b
+                                            on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor and a.Year = b.Year) as e
+                                        left join merge_country as c
+                                            on 1=1 
+                        where e.IndexKor like '%'''+args['indexkor']+'''%'  and e.Year = ''' +args['year']+ ''' limit 100 offset 0''')
 
                 r = [dict((cur.description[i][0], value)
                           for i, value in enumerate(row)) for row in cur.fetchall()]
@@ -74,15 +79,17 @@ class hwaseong_Hscode(Resource):
             parser.add_argument('division', required=True, type=str)
             args = parser.parse_args()
             with mysql.connect().cursor() as cur:
-                cur.execute('''select lpad(d.KSIC, 5,0) as KSIC, d.IndexKor, d.IndexEng, lpad(d.HsCode, 6,0) as HsCode, d.HsCodeKor, d.HsCodeEng, lpad(d.NTS, 6,0) as NTS, d.NTSKor
-                        , d.Year, d.Month, d.Class, d.Biz, d.Prod, d.DLVY, d.BL
-                        , d.DE, d.Division, d.Profit, d.Price, d.Kg as T, d.CNT from
-                        (select a.KSIC, a.IndexKor, a.IndexEng, c.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
-                        , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
-                        , c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT from codezip as a
-                        left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
-                        join merge_country as c on a.HsCode = c.HsCode
-                        where c.HsCode = ''' +args['hscode'] + ''' and b.Year = ''' +args['year'] + ''' and c.Division like "'''+args['division']+'''" ) as d''' )
+                cur.execute('''select e.KSIC, e.IndexKor, e.IndexEng, e.HsCode, e.HsCodeKor, e.HsCodeEng, e.NTS, e.NTSKor, e.Year, e.Month
+                                    , e.Class, e.Biz, e.Prod, e.DLVY, e.BL, c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT 
+                                from
+                                    (select a.KSIC, a.IndexKor, a.IndexEng, a.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
+                                        , b.Year, a.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
+                                        from codezip as a
+                                        left join ksic_Prod_DLVY as b
+                                            on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor and a.Year = b.Year) as e
+                                        left join merge_country as c
+                                            on 1=1 
+                        where e.HsCode = ''' +args['hscode'] + ''' and e.Year = ''' +args['year'] + ''' and c.Division ="'''+args['division']+'''" limit 100 offset 0''' )
 
 
                 r = [dict((cur.description[i][0], value)
@@ -101,15 +108,17 @@ class hwaseong_NTS(Resource):
             parser.add_argument('year', required=True, type=str)
             args = parser.parse_args()
             with mysql.connect().cursor() as cur:
-                cur.execute('''select lpad(d.KSIC, 5,0) as KSIC, d.IndexKor, d.IndexEng, lpad(d.HsCode, 6,0) as HsCode, d.HsCodeKor, d.HsCodeEng, lpad(d.NTS, 6,0) as NTS, d.NTSKor
-                        , d.Year, d.Month, d.Class, d.Biz, d.Prod, d.DLVY, d.BL
-                        , d.DE, d.Division, d.Profit, d.Price, d.Kg as T, d.CNT from
-                        (select a.KSIC, a.IndexKor, a.IndexEng, c.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
-                        , b.Year, c.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
-                        , c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT from codezip as a
-                        left join ksic_Prod_DLVY as b on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor
-                        join merge_country as c on a.HsCode = c.HsCode
-                        where a.NTS = '''+args['nts']+''' and b.Year = ''' +args['year']+ ''') as d''')
+                cur.execute('''select e.KSIC, e.IndexKor, e.IndexEng, e.HsCode, e.HsCodeKor, e.HsCodeEng, e.NTS, e.NTSKor, e.Year, e.Month
+                                    , e.Class, e.Biz, e.Prod, e.DLVY, e.BL, c.DE, c.Division, c.Profit, c.Price, c.Kg, c.CNT 
+                                from
+                                    (select a.KSIC, a.IndexKor, a.IndexEng, a.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
+                                        , b.Year, a.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
+                                        from codezip as a
+                                        left join ksic_Prod_DLVY as b
+                                            on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor and a.Year = b.Year) as e
+                                        left join merge_country as c
+                                            on 1=1 
+                        where e.NTS = '''+args['nts']+''' and e.Year = ''' +args['year']+ ''' limit 100 offset 0''')
 
                 r = [dict((cur.description[i][0], value)
                           for i, value in enumerate(row)) for row in cur.fetchall()]
