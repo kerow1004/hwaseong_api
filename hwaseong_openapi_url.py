@@ -56,10 +56,8 @@ class hwaseong_IndexKor(Resource):
                                     (select a.KSIC, a.IndexKor, a.IndexEng, a.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
                                         , b.Year, a.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                                         from codezip as a
-                                        left join ksic_Prod_DLVY as b
-                                            on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor and a.Year = b.Year) as e
-                                        left join merge_country as c
-                                            on 1=1 
+                                        cross join ksic_Prod_DLVY as b) as e
+                                        cross join merge_country as c 
                         where e.IndexKor like '%'''+args['indexkor']+'''%'  and e.Year = ''' +args['year']+ ''' limit 100 offset 0''')
 
                 r = [dict((cur.description[i][0], value)
@@ -85,8 +83,8 @@ class hwaseong_Hscode(Resource):
                                     (select a.KSIC, a.IndexKor, a.IndexEng, a.HsCode, a.HsCodeKor, a.HsCodeEng, a.NTS, a.NTSKor
                                         , b.Year, a.Month, b.Class, b.Biz, b.Prod, b.DLVY, b.BL
                                         from codezip as a
-                                        left join ksic_Prod_DLVY as b
-                                            on a.KSIC = b.KSIC and a.IndexKor = b.IndexKor and a.Year = b.Year) as e
+                                        cross join ksic_Prod_DLVY as b
+                                            ) as e
                                         left join merge_country as c
                                             on 1=1 
                         where e.HsCode = ''' +args['hscode'] + ''' and e.Year = ''' +args['year'] + ''' and c.Division ="'''+args['division']+'''" limit 100 offset 0''' )
